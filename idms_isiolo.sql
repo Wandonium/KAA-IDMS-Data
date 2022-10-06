@@ -21,6 +21,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `idms_isiolo`
 --
+CREATE DATABASE idms_isiolo;
+USE idms_isiolo;
 
 -- --------------------------------------------------------
 
@@ -93,7 +95,7 @@ INSERT INTO `asure_id_server_settings` (`id`, `aid`, `rid`, `dbname`, `dbusernam
 --
 
 CREATE TABLE `biometric_default_devices` (
-  `id` int NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
   `workstation` varchar(120) NOT NULL DEFAULT 'NOT_SET',
   `device_type_id` int NOT NULL,
   `device_type_name` varchar(120) NOT NULL,
@@ -242,12 +244,79 @@ INSERT INTO `bio_sync_manager` (`id`, `region_id`, `airport_airstrip_id`, `last_
 
 -- --------------------------------------------------------
 
+-- Table structure for table `Border`
+--
+
+CREATE TABLE `Border` (
+  `idBorder` int UNSIGNED NOT NULL,
+  `RedCode` int NOT NULL,
+  `GreenCode` int NOT NULL,
+  `BlueCode` int NOT NULL,
+  `date_generated` timestamp NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `Border`
+--
+
+INSERT INTO `Border` (`idBorder`, `RedCode`, `GreenCode`, `BlueCode`, `date_generated`) VALUES
+(1, 123, 65, 177, '2021-11-24 13:19:11'),
+(2, 115, 34, 44, '2021-11-24 13:24:11'),
+(3, 114, 30, 26, '2021-11-24 13:29:11'),
+(4, 50, 139, 105, '2021-11-24 13:34:11'),
+(5, 142, 203, 148, '2021-11-24 13:39:11'),
+(6, 61, 189, 103, '2021-11-24 13:44:11'),
+(7, 103, 202, 43, '2021-11-24 13:49:11'),
+(8, 57, 116, 187, '2021-11-24 13:54:11'),
+(9, 182, 100, 171, '2021-11-24 13:59:11'),
+(10, 84, 174, 178, '2021-11-24 14:04:11'),
+(11, 120, 53, 123, '2021-11-24 14:09:11'),
+(12, 35, 185, 164, '2021-11-24 14:14:12'),
+(13, 146, 112, 121, '2021-11-24 14:19:11'),
+(14, 10, 20, 69, '2021-11-26 09:03:33'),
+(15, 76, 28, 131, '2021-11-26 09:08:32'),
+(16, 199, 5, 80, '2021-11-26 09:13:32'),
+(17, 68, 156, 140, '2021-11-26 09:18:32'),
+(18, 196, 155, 186, '2021-11-26 09:23:32'),
+(19, 156, 92, 210, '2021-11-26 09:28:32'),
+(20, 114, 132, 100, '2021-11-26 09:33:33'),
+(21, 152, 78, 153, '2021-11-26 09:38:32'),
+(22, 22, 18, 24, '2021-11-26 09:43:32'),
+(23, 17, 214, 141, '2021-11-26 09:48:32'),
+(24, 195, 204, 217, '2021-11-26 09:53:32'),
+(25, 35, 128, 97, '2021-11-26 09:58:32'),
+(26, 95, 54, 203, '2021-11-26 10:03:33'),
+(27, 214, 177, 22, '2021-11-26 11:57:41'),
+(28, 120, 50, 107, '2021-11-26 12:02:41'),
+(29, 183, 207, 49, '2021-11-26 12:07:41'),
+(30, 63, 26, 161, '2021-11-26 12:12:41'),
+(31, 65, 92, 44, '2021-11-26 12:17:41'),
+(32, 38, 84, 87, '2021-11-26 12:22:41'),
+(33, 112, 182, 133, '2021-11-26 12:27:41'),
+(34, 34, 178, 129, '2021-11-26 12:32:42'),
+(35, 200, 173, 43, '2021-11-26 12:37:41'),
+(36, 8, 122, 149, '2021-11-26 12:42:41'),
+(37, 8, 69, 99, '2021-11-26 12:47:41'),
+(38, 189, 68, 210, '2021-11-26 12:52:41'),
+(39, 126, 129, 49, '2021-11-26 12:57:41'),
+(40, 2, 22, 33, '2022-01-16 22:20:52'),
+(41, 0, 0, 0, '2022-01-16 22:23:38'),
+(42, 0, 0, 0, '2022-01-16 22:28:06'),
+(43, 102, 0, 0, '2022-01-16 22:35:18'),
+(44, 0, 102, 102, '2022-01-17 02:31:20'),
+(45, 102, 0, 0, '2022-01-28 12:54:26'),
+(46, 204, 204, 0, '2022-02-01 12:30:17'),
+(47, 102, 102, 102, '2022-02-23 12:26:52'),
+(48, 0, 102, 0, '2022-06-23 08:28:34');
+
+-- --------------------------------------------------------
+
 --
 -- Table structure for table `configfile`
 --
 
 CREATE TABLE `configfile` (
-  `id` int NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
   `server_id` varchar(100) NOT NULL,
   `server_port` varchar(100) NOT NULL,
   `database_name` varchar(30) NOT NULL,
@@ -1554,7 +1623,7 @@ INSERT INTO `local_biocapture_manager` (`id`, `region_id`, `airport_airstrip_id`
 --
 
 CREATE TABLE `local_dispatch` (
-  `id` int NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
   `BatchNO` varchar(8) NOT NULL,
   `source_region_id` int NOT NULL,
   `source_region_name` varchar(200) NOT NULL,
@@ -1587,7 +1656,8 @@ CREATE TABLE `local_dispatch` (
   `initialBatchComment` varchar(180) NOT NULL DEFAULT 'NOT_SET',
   `initialBatchNumber` varchar(120) NOT NULL DEFAULT 'NOT_SET',
   `initialBatchId` int NOT NULL DEFAULT '0',
-  `dispatchingComment` varchar(220) NOT NULL DEFAULT 'NOT_SET'
+  `dispatchingComment` varchar(220) NOT NULL DEFAULT 'NOT_SET',
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
@@ -1714,7 +1784,8 @@ CREATE TABLE `local_print_mgr` (
   `print_template_id` int NOT NULL COMMENT 'The foreign key that maps the template to which permits will be printed to',
   `print_template_name` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT 'The name of the template to which permit will be printed to',
   `date_created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'The timestamp to which the printing request was received',
-  `date_modified` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'The timestamp that shows when  the table record was updated last'
+  `date_modified` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'The timestamp that shows when  the table record was updated last',
+  primary key (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
@@ -1806,7 +1877,7 @@ INSERT INTO `main_path` (`id`, `project_main_path`, `status`, `date_created`) VA
 --
 
 CREATE TABLE `permitbiometrics` (
-  `Id` int NOT NULL COMMENT 'Systems autogenerated ID',
+  `Id` int NOT NULL AUTO_INCREMENT COMMENT 'Systems autogenerated ID',
   `applicantId` varchar(180) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL COMMENT 'Applicants Unique Identifier. ',
   `right_fore` varchar(250) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT 'null' COMMENT 'This field holds filename of right fore fingerprint image',
   `right_originalcapture` varchar(100) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT 'null' COMMENT 'This field holds filename of right fingers fingerprint image',
@@ -1836,7 +1907,8 @@ CREATE TABLE `permitbiometrics` (
   `sync_timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'The timestamp when synchronization was initiated',
   `fingerprint_status` int NOT NULL DEFAULT '0' COMMENT 'The status whether all fingerprint has been fully captured',
   `signature_status` int NOT NULL DEFAULT '0' COMMENT 'The status whether signature was captured',
-  `image_status` int NOT NULL DEFAULT '0' COMMENT 'The status whether photo was captured'
+  `image_status` int NOT NULL DEFAULT '0' COMMENT 'The status whether photo was captured',
+  PRIMARY KEY(`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -2795,7 +2867,7 @@ INSERT INTO `station_vehicle_applications` (`id`, `application_no`, `user_id`, `
 --
 
 CREATE TABLE `stn_print_mgr` (
-  `id` int UNSIGNED NOT NULL,
+  `id` int UNSIGNED NOT NULL AUTO_INCREMENT,
   `permit_no` varchar(100) NOT NULL,
   `permit_category_id` int NOT NULL,
   `permit_type` varchar(100) NOT NULL,
@@ -2844,7 +2916,8 @@ CREATE TABLE `stn_print_mgr` (
   `airport_shortname` varchar(30) DEFAULT NULL,
   `exp_color_red` int DEFAULT NULL,
   `exp_color_green` int DEFAULT NULL,
-  `exp_color_blue` int DEFAULT NULL
+  `exp_color_blue` int DEFAULT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
@@ -3094,7 +3167,7 @@ INSERT INTO `vehicle_shape` (`idvehicle_shape`, `shape_name`, `date_updated`, `s
 --
 
 CREATE TABLE `web_users` (
-  `id` int NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
   `web_user_id` int NOT NULL,
   `first_name` text,
   `middle_name` text,
@@ -3138,7 +3211,8 @@ CREATE TABLE `web_users` (
   `region_name` varchar(100) DEFAULT NULL,
   `station_id` int DEFAULT NULL,
   `station_name` varchar(100) DEFAULT NULL,
-  `password_state` int NOT NULL DEFAULT '1'
+  `password_state` int NOT NULL DEFAULT '1',
+  PRIMARY KEY(`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
@@ -3282,11 +3356,11 @@ ALTER TABLE `local_biocapture_manager`
 --
 -- Indexes for table `local_dispatch`
 --
-ALTER TABLE `local_dispatch`
-  ADD PRIMARY KEY (`id`);
+-- ALTER TABLE `local_dispatch`
+-- ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `local_print_mgr`
+Indexes for table `local_print_mgr`
 --
 ALTER TABLE `local_print_mgr`
   ADD PRIMARY KEY (`id`);
@@ -3523,8 +3597,8 @@ ALTER TABLE `local_biocapture_manager`
 --
 -- AUTO_INCREMENT for table `local_dispatch`
 --
-ALTER TABLE `local_dispatch`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
+-- ALTER TABLE `local_dispatch`
+-- MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `local_print_mgr`
@@ -3675,6 +3749,46 @@ ALTER TABLE `vehicle_shape`
 --
 ALTER TABLE `web_users`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+  
+--
+-- Create table finger_setup
+--
+CREATE TABLE `fingers_setup` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`fingers_to_capture` VARCHAR(255),
+    `airport_id` INT,
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Create printer_setup table
+--
+CREATE TABLE `printer_setup` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`printer_name` VARCHAR(255),
+    `airport_id` INT,
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `print_templates` (
+	`id` int NOT NULL AUTO_INCREMENT,
+	`template_code` varchar(60) NOT NULL,
+	`template_name` varchar(200) NOT NULL,
+	`template_start_date` date NOT NULL,
+	`expiry_date` date NOT NULL,
+	`region_id` int NOT NULL,
+	`region_name` varchar(180) NOT NULL,
+	`pass_type` varchar(100),
+	`financial_year` varchar(100),
+	`status` int NOT NULL,
+	`design_status` int NOT NULL,
+	`svg` varchar(100),
+	`front_card_upload` varchar(255) NOT NULL,
+	`back_card_upload` varchar(255) NOT NULL,
+	PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
